@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <title>DiceGame</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="gameStyle.css">
   </head>
   <body>
     <div class="container-fluid">
@@ -35,8 +36,99 @@
               <p id="result"></p>
               <button id="generate">Click me!!</button>
               <script src="bundle.js" charset="utf-8"></script></div>
-            <div class="col-8" style="border: 1px solid;margin-top: 3%;" id="game">
-              
+            
+              <div class="col-8" style="border: 1px solid;margin-top: 3%;" id="game">
+              <div class="dice">
+                <ol class="die-list even-roll" data-roll="1" id="die-1">
+                  <li class="die-item" data-side="1">
+                    <span class="dot"></span>
+                  </li>
+                  <li class="die-item" data-side="2">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                  </li>
+                  <li class="die-item" data-side="3">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                  </li>
+                  <li class="die-item" data-side="4">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                  </li>
+                  <li class="die-item" data-side="5">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                  </li>
+                  <li class="die-item" data-side="6">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                  </li>
+                </ol>
+                <ol class="die-list odd-roll" data-roll="1" id="die-2">
+                  <li class="die-item" data-side="1">
+                    <span class="dot"></span>
+                  </li>
+                  <li class="die-item" data-side="2">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                  </li>
+                  <li class="die-item" data-side="3">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                  </li>
+                  <li class="die-item" data-side="4">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                  </li>
+                  <li class="die-item" data-side="5">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                  </li>
+                  <li class="die-item" data-side="6">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                  </li>
+                </ol>
+              </div>
+        
+              <div id="displayResult">
+                <label id="result"><br /></label>
+        
+                <button
+                  type="button"
+                  id="play"
+                  onclick="
+                  var num1 = Math.floor(Math.random() * 6) + 1; 
+                  var num2 = Math.floor(Math.random() * 6) + 1; rollDice(num1,num2);
+                        document.getElementById('result').innerHTML = num1 + num2;
+                        document.getElementById('rndNum1').value = num1;
+                  document.getElementById('rndNum2').value = num2;"
+                >
+                  <input type="hidden" id="rndNum1" value="1" />
+                  <input type="hidden" id="rndNum2" value="1" />
+                  Roll Dice
+                </button>
+              </div>
             </div>
             <div class="col-2"></div>
            
@@ -83,4 +175,5 @@
       </div>
     </div>
   </body>
+  <script src="game.js"></script>
 </html>
