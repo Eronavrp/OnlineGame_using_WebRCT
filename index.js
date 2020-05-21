@@ -1,4 +1,4 @@
-var getUserMedia = require("getusermedia");
+//var getUserMedia = require("getusermedia");
 getUserMedia({ video: true, audio: false }, function (err, stream) {
 	if (err) return console.error(err);
 
@@ -51,7 +51,7 @@ getUserMedia({ video: true, audio: false }, function (err, stream) {
 	peer.on("stream", function (stream) {
 		var video = document.createElement("video");
 		document.body.appendChild(video);
-		video.srcObject = stream;
+		//video.srcObject = stream;
 		//video.src = window.URL.createObjectURL(stream);
 		//video.play();
 	});
