@@ -1,5 +1,8 @@
-//var getUserMedia = require("getusermedia");
-getUserMedia({ video: true, audio: false }, function (err, stream) {
+var getUserMedia = require("getusermedia");
+getUserMedia({ video: {
+        width: { ideal: 436},
+        height: { ideal: 300 }
+    }, audio: false }, function (err, stream) {
 	if (err) return console.error(err);
 
 	var Peer = require("simple-peer");
@@ -20,10 +23,28 @@ getUserMedia({ video: true, audio: false }, function (err, stream) {
 		peer.signal(otherId);
 	});
 
-	document.getElementById("send").addEventListener("click", function () {
+		document.getElementById("send").addEventListener("click", function () {
+	    console.log("abcabca");
+		var d = new Date();
+		var hour = d.getHours(); if(hour/10<1)hour="0"+hour;
+		var minutes = d.getMinutes(); if(minutes/10<1)minutes="0"+minutes;
+		var message = document.getElementById("yourMessage").value;
+		document.getElementById("yourMessage").value="";
+		var chatWithText = document.getElementById("chatWithText");
+		chatWithText.innerHTML+="<div class='d-flex justify-content-end mb-4'>\n"+
+						     "<div class='msg_cotainer_send'>\n"+
+						     message + 
+						     "<span class='msg_time_send'>" + hour + ":" + minutes +"</span>\n"+
+						     "</div>\n"+
+						     "<div class='img_cont_msg'>\n"+
+						     "<img src='x-men.png' class='rounded-circle user_img_msg'>\n"+
+						     "</div>\n"+
+						     "</div>";
+
+		chatWithText.scrollTop = chatWithText.scrollHeight;
 		var myObj = JSON.parse(myJSON);
 		myObj.destination="message";
-		myObj.value=document.getElementById("yourMessage").value+"";
+		myObj.value=message+"";
 		m=JSON.stringify(myObj);
 		peer.send(m);
 	});
@@ -38,9 +59,21 @@ getUserMedia({ video: true, audio: false }, function (err, stream) {
 	});
 
 	peer.on("data", function (data) {
+		var d = new Date();
+		var hour = d.getHours(); if(hour/10<1)hour="0"+hour;
+		var minutes = d.getMinutes(); if(minutes/10<1)minutes="0"+minutes;
 		var d=JSON.parse(data);
 		if(d.destination=="message"){
-			document.getElementById("messages").textContent += d.value + "\n";
+		var chatWithText = document.getElementById("chatWithText");
+		chatWithText.innerHTML+="<div class='d-flex justify-content-start mb-4'>\n"+
+						     "<div class='img_cont_msg'>\n"+
+						     "<img src='x-men.png' class='rounded-circle user_img_msg'>\n"+
+						     "</div>\n"+
+						     "<div class='msg_cotainer'>\n"+
+						     d.value + "<span class='msg_time'>" + hour+":"+minutes+"</span>\n"+
+						     "</div>\n"+
+						     "</div>";
+		chatWithText.scrollTop = chatWithText.scrollHeight;
 		}
 		else{
 			document.getElementById('result').innerHTML=d.value;
@@ -50,9 +83,10 @@ getUserMedia({ video: true, audio: false }, function (err, stream) {
 
 	peer.on("stream", function (stream) {
 		var video = document.createElement("video");
-		document.body.appendChild(video);
-		//video.srcObject = stream;
+		document.getElementById("video").appendChild(video);
+		//document.body.appendChild(video);
+		video.srcObject = stream;
 		//video.src = window.URL.createObjectURL(stream);
-		//video.play();
+		video.play();
 	});
 });

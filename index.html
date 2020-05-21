@@ -31,10 +31,6 @@
               <label>Other ID:</label><br/>
               <textarea id="otherId"></textarea>
               <button id="connect">connect</button><br/>
-              <label>Enter Message:</label><br/>
-              <textarea id="yourMessage"></textarea>
-              <button id="send">send</button>
-              <pre id="messages"></pre>
               <label>Rezultati</label>
               <p id="result"></p>
               <button id="generate">Click me!!</button>
@@ -67,37 +63,16 @@
                       </div>
                     </div>
                   </div>
-                  <div class="card-body msg_card_body">
-                    <!-- <div class="d-flex justify-content-start mb-4">
-                      <div class="img_cont_msg">
-                        <img src="x-men.png" class="rounded-circle user_img_msg">
-                      </div>
-                      <div class="msg_cotainer">
-                        Hi, how are you samim?
-                        <span class="msg_time">8:40 AM, Today</span>
-                      </div>
-                    </div> -->
-
-                    //
-                    <div class="d-flex justify-content-end mb-4">
-                      <div class="msg_cotainer_send">
-                        Hi Khalid i am good tnx how about you?
-                        <span class="msg_time_send">8:55 AM, Today</span>
-                      </div>
-                      <div class="img_cont_msg">
-                    <img src="x-men.png" class="rounded-circle user_img_msg">
-                      </div>
-                    </div>
-                    //
+                  <div id="chatWithText" class="card-body msg_card_body">
                   </div>
                   <div class="card-footer">
                     <div class="input-group">
                       <div class="input-group-append">
                         <span class="input-group-text attach_btn"></span>
                       </div>
-                      <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                      <textarea id="yourMessage" name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
                       <div class="input-group-append">
-                        <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+                        <span class="input-group-text send_btn" id="send"><i class="fas fa-location-arrow"></i></span>
                       </div>
                     </div>
                   </div>
