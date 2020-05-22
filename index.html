@@ -28,24 +28,20 @@
           </div>
           <div class="row" >
             <div class="col-2">
-              <div id="connection">
-                <div class="con" >
-                  <label>Your ID:</label><br/>
-                  <textarea id="yourId"></textarea><br/>
-                </div>
-                <div class="con">
-                  <label>Other ID:</label><br/>
-                  <textarea id="otherId"></textarea>
-                </div>
-                <button id="connect">connect</button><br/>
-              </div> 
-              <p id="result" style="display: none;"></p>
-               <script src="bundle.js" charset="utf-8"></script>
+              <!-- <label>Your ID:</label><br/>
+              <textarea id="yourId"></textarea><br/>
+              <label>Other ID:</label><br/>
+              <textarea id="otherId"></textarea>
+              <button id="connect">connect</button><br/>
+              <label>Rezultati</label>
+              <p id="result"></p>
+              <button id="generate">Click me!!</button> -->
+              <script src="bundle.js" charset="utf-8"></script>
             </div>
             
-            <div class="col-8" style="margin-top: 3%;" id="game">
-                  //connection
-                  <div id="connection"style="display:none" >
+            <div class="col-8" style="margin-top: 5%;" id="game">
+                  <!-- connection -->
+                  <div id="connection" >
                     <div class="con" >
                       <label>Your ID:</label><br/>
                       <textarea id="yourId"></textarea><br/>
@@ -56,14 +52,14 @@
                     </div>
                     <button id="connect">connect</button><br/>
                   </div> 
-                  //end Game
+                  <!-- end Game -->
                   <div id="win" style="display: none;" >
                     <h1 id="winner" >You Won !</h1>
                     <button id="playAgain"><i class="fas fa-redo-alt" style="font-size:36px"></i></button>
                   </div> 
-                  //show Dice
-                  <div class="dice" id="dice">
-                      <div>
+                  <!-- //show Dice -->
+                  <div class="dice" id="dice" style="display:none">
+                      <div style="margin-top:40px">
                       <ol class="die-list even-roll" data-roll="1" id="die-1">
                         <li class="die-item" data-side="1">
                           <span class="dot"></span>
@@ -151,7 +147,7 @@
                   Roll Dice
                 </button>
               </div>
-              <div id="displayResult">
+              <div id="displayResult" style="display:none">
                 <label id="result"><br /></label>
               </div>
             </div>
@@ -173,7 +169,7 @@
                         <span>Chat with Friend</span>
                       </div>
                       <div class="video_cam">
-                        <span><i class="fas fa-video"></i></span>
+                        <span><i class="fas fa-video" id="startOrStopCamera"></i></span>
                       </div>
                       <div class="video_cam">
                         <span><i class="fas fa-microphone"></i></span>
