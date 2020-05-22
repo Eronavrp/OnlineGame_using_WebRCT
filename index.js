@@ -1,4 +1,5 @@
 var getUserMedia = require("getusermedia");
+var tracks;
 getUserMedia(
 	{
 		video: {
@@ -66,6 +67,13 @@ getUserMedia(
 			peer.send(m);
 		});
 
+		document.getElementById("startOrStopCamera").addEventListener("click",function(){
+
+			//tracks.forEach(function(track) {
+			tracks[0].enabled = !tracks[0].enabled;
+		//});
+		});
+
 		document.getElementById("play").addEventListener("click", function () {
 			document.getElementById("play").disabled = true;
 			//document.getElementById("play").classList.toggle("disabled");
@@ -122,6 +130,7 @@ getUserMedia(
 			document.getElementById("video").appendChild(video);
 			//document.body.appendChild(video);
 			video.srcObject = stream;
+			tracks = stream.getTracks();
 			//video.src = window.URL.createObjectURL(stream);
 			video.play();
 		});
