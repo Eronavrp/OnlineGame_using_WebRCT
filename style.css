@@ -150,13 +150,4 @@ html {
 	margin-left: 3%;
 	line-height: 1px;
 }
-#play {
-	text-align: center;
-	font-size: 27px;
-	padding: 2px 10px;
-	border-radius: 7px;
-	border: none;
-	color: #dadada;
-	background-color: rgba(0, 0, 0, 0.5) !important;
-	margin: 35px 0 0 460px;
-}
+

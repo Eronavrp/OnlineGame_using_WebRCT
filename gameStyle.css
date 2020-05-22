@@ -14,7 +14,6 @@ li,
 }
 
 #game {
-	background: linear-gradient(#545454, #454545, #676767);
 	display: grid;
 	grid-template-columns: 1fr;
 	height: 500px;
@@ -195,13 +194,15 @@ li,
 
 #game button {
 	align-self: center;
-	background-color: #efefef;
+	color: #dadada;
+	background-color: rgba(0, 0, 0, 0.5) !important;
 	border: none;
-	color: #333;
 	font-size: 1.25rem;
 	font-weight: 700;
 	justify-self: center;
 	padding: 0.5rem 1rem;
+	display:block;
+	margin:0 auto;
 }
 #game button:hover {
 	cursor: pointer;
