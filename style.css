@@ -150,4 +150,24 @@ html {
 	margin-left: 3%;
 	line-height: 1px;
 }
-
+.con{
+	display: inline-block;
+	margin:82px;
+	color:#fafafa;
+}
+.connect{
+	display: inline-block;
+}
+@font-face {
+	font-family: myFont;
+	src: url(Bangers-Regular.ttf);
+  }
+#winner{
+	text-align: center;
+	margin-top:15%;
+	color: indigo;
+	text-shadow: 2px 2px #dadada;
+	font-family: myFont;
+	letter-spacing: 3px;
+	font-size: 60px;
+}

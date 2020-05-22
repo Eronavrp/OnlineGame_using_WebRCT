@@ -22,7 +22,7 @@ li,
 	margin-left: auto;
 	margin-right: auto;
 }
-.dice {
+.dice>div {
 	align-items: center;
 	display: grid;
 	grid-gap: 2rem;
@@ -197,12 +197,13 @@ li,
 	color: #dadada;
 	background-color: rgba(0, 0, 0, 0.5) !important;
 	border: none;
+	border-radius: 10px;
 	font-size: 1.25rem;
 	font-weight: 700;
 	justify-self: center;
-	padding: 0.5rem 1rem;
+	padding: 0.7rem 1.7rem;
 	display:block;
-	margin:0 auto;
+	margin:100px auto;
 }
 #game button:hover {
 	cursor: pointer;

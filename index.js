@@ -20,7 +20,7 @@ getUserMedia(
 		peer.on("signal", function (data) {
 			document.getElementById("yourId").value = JSON.stringify(data);
 		});
-
+		var win=15;
 		var myJSON =
 			'{"destination":"John", "value":31, "firstDie":1, "secondDie":2}';
 
@@ -66,20 +66,30 @@ getUserMedia(
 			peer.send(m);
 		});
 
-		document.getElementById("play").addEventListener("click", function () {
+		    document.getElementById("play").addEventListener("click", function () {
 			document.getElementById("play").disabled = true;
-			//document.getElementById("play").classList.toggle("disabled");
-
 			var myObj = JSON.parse(myJSON);
 
 			myObj.destination = "result";
-			//var random = Math.random() * 10;
-			var random = parseInt(document.getElementById("result").innerHTML);
-
+			var myResult = parseInt(document.getElementById("result").innerHTML);
+			var myScore=parseInt(document.getElementById('me').innerHTML);
+			if(myResult!=7){
+				myScore+=myResult;
+			}
+			else{
+				myScore=0;
+			}
+			document.getElementById('me').innerHTML=myScore;
+			if(myScore>=win){
+				var end=document.getElementById('winner');
+				end.innerHTML="Won";
+				end.style.color='indigo';
+				document.getElementById('dice').style='display:none';
+				document.getElementById('win').style='display:block';
+			}
 			rndNum1 = parseInt(document.getElementById("rndNum1").value);
 			rndNum2 = parseInt(document.getElementById("rndNum2").value);
-			//rollDice2(rndNum1, rndNum2);
-			myObj.value = random;
+			myObj.value = myScore;
 			myObj.firstNum = rndNum1;
 			myObj.secondNum = rndNum2;
 			m = JSON.stringify(myObj);
@@ -113,7 +123,14 @@ getUserMedia(
 			} else {
 				document.getElementById("play").disabled = false;
 				rollDice(d.firstNum, d.secondNum);
-				document.getElementById("result").innerHTML = d.value;
+				document.getElementById('friend').innerHTML = d.value;
+				if(d.value>=win){
+					document.getElementById('dice').style='display:none';
+				    var end=document.getElementById('winner');
+				    end.innerHTML="Lost";
+					end.style.color='darkred';
+					document.getElementById('win').style='display:block';
+				}
 			}
 		});
 

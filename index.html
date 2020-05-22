@@ -14,109 +14,129 @@
         <div class="col-8">
           <div class="row">
             <div class="col-6" style="padding-left:100px;">
-              <h1 class="points" style="color:rgb(27, 6, 108)" id="me">17</h1>
+              <h1 class="points" style="	color: indigo;" id="me">0</h1>
               <p>You</p>
             </div>
             <div class="col-4"></div>
             <div class="col-2">
-              <h1 class="points"style="color:darkred " id="friend">20</h1>
+              <h1 class="points"style="color:darkred " id="friend">0</h1>
               <p>Friend</p>
             </div>
           </div>
           <div class="row">
-            <p style="text-align: center;width:500px;color: #fafafa;margin: 3% 0 0 25%;">How to play: Go ahead and roll the dice to earn points. If you score a 7 than your score is reset to 0. </p>
+            <p style="text-align: center;width:500px;color: #fafafa;margin: 3% 0 0 25%;">How to play: Go ahead and roll the dice to earn points. If you score a 7 than your score is reset to 0, otherwise if you score 15 points first you  will win. </p>
           </div>
           <div class="row" >
             <div class="col-2">
-              <!-- <label>Your ID:</label><br/>
-              <textarea id="yourId"></textarea><br/>
-              <label>Other ID:</label><br/>
-              <textarea id="otherId"></textarea>
-              <button id="connect">connect</button><br/>
-              <label>Rezultati</label>
-              <p id="result"></p>
-              <button id="generate">Click me!!</button>
-              <script src="bundle.js" charset="utf-8"></script> -->
+              <div id="connection">
+                <div class="con" >
+                  <label>Your ID:</label><br/>
+                  <textarea id="yourId"></textarea><br/>
+                </div>
+                <div class="con">
+                  <label>Other ID:</label><br/>
+                  <textarea id="otherId"></textarea>
+                </div>
+                <button id="connect">connect</button><br/>
+              </div> 
+              <p id="result" style="display: none;"></p>
+               <script src="bundle.js" charset="utf-8"></script>
             </div>
             
-              <div class="col-8" style="margin-top: 3%;" id="game">
-              <div class="dice">
-                <ol class="die-list even-roll" data-roll="1" id="die-1">
-                  <li class="die-item" data-side="1">
-                    <span class="dot"></span>
-                  </li>
-                  <li class="die-item" data-side="2">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                  </li>
-                  <li class="die-item" data-side="3">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                  </li>
-                  <li class="die-item" data-side="4">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                  </li>
-                  <li class="die-item" data-side="5">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                  </li>
-                  <li class="die-item" data-side="6">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                  </li>
-                </ol>
-                <ol class="die-list odd-roll" data-roll="1" id="die-2" style="margin-left:-62px">
-                  <li class="die-item" data-side="1">
-                    <span class="dot"></span>
-                  </li>
-                  <li class="die-item" data-side="2">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                  </li>
-                  <li class="die-item" data-side="3">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                  </li>
-                  <li class="die-item" data-side="4">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                  </li>
-                  <li class="die-item" data-side="5">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                  </li>
-                  <li class="die-item" data-side="6">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                  </li>
-                </ol>
-              </div>
-        
-              <div id="displayResult">
-                <label id="result"><br /></label>
-        
-                <button
+            <div class="col-8" style="margin-top: 3%;" id="game">
+                  //connection
+                  <div id="connection"style="display:none" >
+                    <div class="con" >
+                      <label>Your ID:</label><br/>
+                      <textarea id="yourId"></textarea><br/>
+                    </div>
+                    <div class="con">
+                      <label>Other ID:</label><br/>
+                      <textarea id="otherId"></textarea>
+                    </div>
+                    <button id="connect">connect</button><br/>
+                  </div> 
+                  //end Game
+                  <div id="win" style="display: none;" >
+                    <h1 id="winner" >You Won !</h1>
+                    <button id="playAgain"><i class="fas fa-redo-alt" style="font-size:36px"></i></button>
+                  </div> 
+                  //show Dice
+                  <div class="dice" id="dice">
+                      <div>
+                      <ol class="die-list even-roll" data-roll="1" id="die-1">
+                        <li class="die-item" data-side="1">
+                          <span class="dot"></span>
+                        </li>
+                        <li class="die-item" data-side="2">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </li>
+                        <li class="die-item" data-side="3">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </li>
+                        <li class="die-item" data-side="4">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </li>
+                        <li class="die-item" data-side="5">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </li>
+                        <li class="die-item" data-side="6">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </li>
+                      </ol>
+                      <ol class="die-list odd-roll" data-roll="1" id="die-2" style="margin-left:-62px">
+                        <li class="die-item" data-side="1">
+                          <span class="dot"></span>
+                        </li>
+                        <li class="die-item" data-side="2">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </li>
+                        <li class="die-item" data-side="3">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </li>
+                        <li class="die-item" data-side="4">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </li>
+                        <li class="die-item" data-side="5">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </li>
+                        <li class="die-item" data-side="6">
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </li>
+                      </ol>
+                    </div>
+                    
+                  <button
                   type="button"
                   id="play"
                   onclick="
@@ -130,6 +150,9 @@
                   <input type="hidden" id="rndNum2" value="1" />
                   Roll Dice
                 </button>
+              </div>
+              <div id="displayResult">
+                <label id="result"><br /></label>
               </div>
             </div>
             <div class="col-2"></div>
