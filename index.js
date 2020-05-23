@@ -3,8 +3,8 @@ var myVideo = document.createElement("video");
 			if(navigator.getUserMedia)
 			{
 				navigator.getUserMedia({ video: {
-        width: { ideal: 100},
-        height: { ideal: 100 }
+        width: { ideal: 150},
+        height: { ideal: 150 }
     }},handleVideo, videoError);
 			}
 			function handleVideo(stream)
@@ -26,7 +26,7 @@ var tracks2;
 getUserMedia(
 	{
 		video: {
-			width: { ideal: 436 },
+			width: { ideal: 497 },
 			height: { ideal: 300 },
 		},
 		audio: false,
@@ -119,7 +119,7 @@ getUserMedia(
 			document.getElementById('me').innerHTML=myScore;
 			if(myScore>=win){
 				var end=document.getElementById('winner');
-				end.innerHTML="Won";
+				end.innerHTML="You Won !";
 				end.style.color='indigo';
 				document.getElementById('dice').style='display:none';
 				document.getElementById('win').style='display:block';
@@ -169,7 +169,7 @@ getUserMedia(
 				if(d.value>=win){
 					document.getElementById('dice').style='display:none';
 				    var end=document.getElementById('winner');
-				    end.innerHTML="Lost";
+				    end.innerHTML=" You Lost !";
 					end.style.color='darkred';
 					document.getElementById('win').style='display:block';
 				}
