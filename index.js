@@ -1,6 +1,7 @@
-
-
+ 
+ var myVideo = document.createElement("video");
  var getUserMedia = require("getusermedia");
+ var tracks
  var tracks2;
 
 getUserMedia(
@@ -73,10 +74,10 @@ getUserMedia(
 		
 		document.getElementById("startOrStopCamera").addEventListener("click",function(){
 
-		// 	tracks.forEach(function(track) {
-		// 	track.enabled = !track.enabled;
+			tracks.forEach(function(track) {
+			track.enabled = !track.enabled;
 			
-		// });
+		});
 			var myObj = JSON.parse(myJSON);
 			myObj.destination = "camera";
 			m = JSON.stringify(myObj);
@@ -96,13 +97,15 @@ getUserMedia(
 			else{
 				myScore=0;
 			}
-			document.getElementById('me').innerHTML=myScore;
+			setTimeout(() => {  document.getElementById('me').innerHTML=myScore; }, 1600);
+			//document.getElementById('me').innerHTML=myScore;
 			if(myScore>=win){
+				setTimeout(() => {
 				var end=document.getElementById('winner');
-				end.innerHTML="You Won !";
+				//end.innerHTML="You Won !";
 				end.style.color='indigo';
 				document.getElementById('dice').style='display:none';
-				document.getElementById('win').style='display:block';
+				document.getElementById('win').style='display:block';}, 2200);
 			}
 			rndNum1 = parseInt(document.getElementById("rndNum1").value);
 			rndNum2 = parseInt(document.getElementById("rndNum2").value);
@@ -145,13 +148,17 @@ getUserMedia(
 			else {
 				document.getElementById("play").disabled = false;
 				rollDice(d.firstNum, d.secondNum);
-				document.getElementById('friend').innerHTML = d.value;
+				setTimeout(() => {  document.getElementById('friend').innerHTML = d.value; }, 1600);
+				//document.getElementById('friend').innerHTML = d.value;
 				if(d.value>=win){
+					setTimeout(()=>{
 					document.getElementById('dice').style='display:none';
 				    var end=document.getElementById('winner');
 				    end.innerHTML=" You Lost !";
 					end.style.color='darkred';
 					document.getElementById('win').style='display:block';
+					}, 2200);
+	
 				}
 			}
 		});
@@ -164,8 +171,6 @@ getUserMedia(
 			tracks2 = stream.getTracks();
 			//video.src = window.URL.createObjectURL(stream);
 			video.play();
-			var tracks;
-			var myVideo = document.createElement("video");
 			if(navigator.getUserMedia)
 			{
 				navigator.getUserMedia({ video: {
@@ -178,7 +183,6 @@ getUserMedia(
 				document.getElementById("myCamera").appendChild(myVideo);
 				myVideo.srcObject = stream;
 				tracks = stream.getTracks();
-				myVideo.play();
 			}
 			function videoError(e)
 			{
@@ -189,6 +193,7 @@ getUserMedia(
 		peer.on('connect', () => {
 			document.getElementById("connection").style="display:none";
 			document.getElementById("dice").style="display:block";
+			myVideo.play();
 		})
 
 	});
