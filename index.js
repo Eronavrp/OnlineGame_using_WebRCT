@@ -1,7 +1,6 @@
 var myVideo = document.createElement("video");
 var getUserMedia = require("getusermedia");
-var tracks2;
-var tracks;
+var myTracks;
 
 getUserMedia(
 	{
@@ -24,7 +23,7 @@ getUserMedia(
 		peer.on("signal", function (data) {
 			document.getElementById("yourId").value = JSON.stringify(data);
 		});
-		var win = 15;
+		var win = 6;
 		var myJSON =
 			'{"destination":"John", "value":31, "firstDie":1, "secondDie":2}';
 
@@ -77,6 +76,9 @@ getUserMedia(
 				tracksTemp.forEach(function (track) {
 					track.enabled = !track.enabled;
 				});
+				myTracks.forEach(function (track) {
+					track.enabled = !track.enabled;
+				});
 			});
 
 		document
@@ -88,6 +90,8 @@ getUserMedia(
 				});
 			});
 
+		var myScore = parseInt(document.getElementById("me").innerHTML);
+
 		document.getElementById("play").addEventListener("click", function () {
 			document.getElementById("play").disabled = true;
 			var myObj = JSON.parse(myJSON);
@@ -96,7 +100,7 @@ getUserMedia(
 			var myResult = parseInt(
 				document.getElementById("result").innerHTML
 			);
-			var myScore = parseInt(document.getElementById("me").innerHTML);
+
 			if (myResult != 7) {
 				myScore += myResult;
 			} else {
@@ -105,11 +109,11 @@ getUserMedia(
 			setTimeout(() => {
 				document.getElementById("me").innerHTML = myScore;
 			}, 1600);
-			//document.getElementById('me').innerHTML=myScore;
+
 			if (myScore >= win) {
 				setTimeout(() => {
 					var end = document.getElementById("winner");
-					//end.innerHTML="You Won !";
+					end.innerHTML = "You Won !";
 					end.style.color = "indigo";
 					document.getElementById("dice").style = "display:none";
 					document.getElementById("win").style = "display:block";
@@ -148,6 +152,12 @@ getUserMedia(
 					"</div>\n" +
 					"</div>";
 				chatWithText.scrollTop = chatWithText.scrollHeight;
+			} else if (d.destination == "playAgain") {
+				document.getElementById("friend").innerHTML = 0;
+				document.getElementById("dice").style = "display:block";
+				document.getElementById("win").style = "display:none";
+				document.getElementById("me").innerHTML = 0;
+				myScore = d.value;
 			} else {
 				document.getElementById("play").disabled = false;
 				rollDice(d.firstNum, d.secondNum);
@@ -166,6 +176,21 @@ getUserMedia(
 				}
 			}
 		});
+
+		document
+			.getElementById("playAgain")
+			.addEventListener("click", function () {
+				myScore = 0;
+				document.getElementById("dice").style = "display:block";
+				document.getElementById("win").style = "display:none";
+				var myObj = JSON.parse(myJSON);
+				myObj.destination = "playAgain";
+				document.getElementById("friend").innerHTML = 0;
+				document.getElementById("me").innerHTML = 0;
+				myObj.value = 0;
+				m = JSON.stringify(myObj);
+				peer.send(m);
+			});
 
 		peer.on("stream", function (stream2) {
 			var video = document.createElement("video");
@@ -189,7 +214,7 @@ getUserMedia(
 			function handleVideo(stream) {
 				document.getElementById("myCamera").appendChild(myVideo);
 				myVideo.srcObject = stream;
-				tracks = stream.getTracks();
+				myTracks = stream.getTracks();
 			}
 			function videoError(e) {}
 		});
