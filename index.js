@@ -69,6 +69,18 @@ getUserMedia(
 			peer.send(m);
 		});
 
+		var input_field = document.getElementById("yourMessage");
+		    
+		input_field.addEventListener("keyup", function(event)
+		{
+			if (event.keyCode === 13)
+			{
+				event.preventDefault();
+				var x = document.getElementById("send").click();
+				document.getElementById("send").click();
+			}
+		});
+
 		document
 			.getElementById("toggleVideo")
 			.addEventListener("click", function () {
@@ -76,16 +88,18 @@ getUserMedia(
 				tracksTemp.forEach(function (track) {
 					track.enabled = !track.enabled;
 				});
+				this.classList.toggle("red");
 			});
-
 		document
 			.getElementById("toggleAudio")
 			.addEventListener("click", function () {
 				tracksTemp = stream.getAudioTracks();
 				tracksTemp.forEach(function (track) {
 					track.enabled = !track.enabled;
-				});
+				});	
+				this.classList.toggle("red");
 			});
+		
 
 		var myScore = parseInt(document.getElementById("me").innerHTML);
 
@@ -191,7 +205,10 @@ getUserMedia(
 
 		peer.on("stream", function (stream2) {
 			var video = document.createElement("video");
+			document.getElementById('video').style.height="auto";
 			video.style.width = "100%";
+			console.log(video.style.width )
+			video.style.height = "100%";
 			document.getElementById("video").appendChild(video);
 			video.srcObject = stream2;
 			video.play();

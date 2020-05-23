@@ -27,10 +27,7 @@
             <p style="text-align: center;width:500px;color: #fafafa;margin: 3% 0;">How to play: Go ahead and roll the dice to earn points. If you score a 7 than your score is reset to 0, otherwise if you score 15 points first you  will win. </p>
           </div>
           <div class="row" >
-            <div class="col-2">
-              <script src="bundle.js" charset="utf-8"></script>
-            </div>
-            
+            <div class="col-2"></div>
             <div class="col-8" style="margin-top: 5%;" id="game">
                   <!-- connection -->
                   <div id="connection">
@@ -145,7 +142,7 @@
         </div>
         <div class="col-4">
           <div id="video">
-            <div id="myCamera" style="position: absolute; top:275px; left:375px; max-width:150px; max-height:150px;"></div>
+            <div id="myCamera" class="small big same"></div>
           </div>
             
             <div id="chat">
@@ -163,7 +160,7 @@
                         <span><i class="fas fa-video" id="toggleVideo"></i></span>
                       </div>
                       <div class="video_cam">
-                        <span><i class="fas fa-microphone"style="color:red" id="toggleAudio"></i></span>
+                        <span><i class="fas fa-microphone" id="toggleAudio"></i></span>
                       </div>
                     </div>
                   </div>
@@ -187,5 +184,6 @@
       </div>
     </div>
   </body>
+  <script src="bundle.js" charset="utf-8"></script>
   <script src="game.js"></script>
 </html>

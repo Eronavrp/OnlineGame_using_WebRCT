@@ -6,12 +6,15 @@ html {
 	background: -webkit-linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
 	background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
 }
+body{
+	overflow-y: hidden;
+}
 .chat {
 	margin-top: auto;
 	margin-bottom: auto;
 }
 .card {
-	height: 450px;
+	height: 380px;
 	/* border-radius: 15px !important;*/
 	background-color: rgba(0, 0, 0, 0.4) !important;
 }
@@ -135,7 +138,8 @@ html {
 }
 #video {
 	background-color: rgba(0, 0, 0, 0.5) !important;
-	height: 300px;
+	position: relative;
+	height: 370px;
 }
 .col-4 {
 	padding-right: 0;
@@ -173,3 +177,48 @@ html {
 #yourId,#otherId{
 	border-radius: 5px;
 }
+.same{
+	position: absolute;
+	max-width: 150px;
+	max-height: 150px;
+		right:0;
+		bottom: 0;
+}
+
+.red{
+	color:red;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey; 
+	border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: darkslateblue; 
+	border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: darkslateblue; 
+  }
+
+/* @media screen and (min-width: 700px){
+	.small {    
+		top: 191px;
+		left: 175px;
+		}
+  }
+  @media screen and (min-width: 809px){
+	.big {     
+		top:245px; 
+		left:365px; 
+		}
+  } */
