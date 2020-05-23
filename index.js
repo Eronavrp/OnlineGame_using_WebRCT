@@ -1,17 +1,17 @@
 var myVideo = document.createElement("video");
 var getUserMedia = require("getusermedia");
-var myTracks;
 
 getUserMedia(
 	{
-		video: {
-			width: { ideal: 497 },
-			height: { ideal: 300 },
-		},
+		video: true,
 		audio: true,
 	},
 	function (err, stream) {
 		if (err) return console.error(err);
+
+		myVideo.width = 150;
+		document.getElementById("myCamera").appendChild(myVideo);
+		myVideo.srcObject = stream;
 
 		var Peer = require("simple-peer");
 		var peer = new Peer({
@@ -76,9 +76,6 @@ getUserMedia(
 				tracksTemp.forEach(function (track) {
 					track.enabled = !track.enabled;
 				});
-				myTracks.forEach(function (track) {
-					track.enabled = !track.enabled;
-				});
 			});
 
 		document
@@ -96,10 +93,12 @@ getUserMedia(
 			document.getElementById("play").disabled = true;
 			var myObj = JSON.parse(myJSON);
 
+			var num1 = Math.floor(Math.random() * 6) + 1;
+			var num2 = Math.floor(Math.random() * 6) + 1;
+			rollDice(num1, num2);
+
 			myObj.destination = "result";
-			var myResult = parseInt(
-				document.getElementById("result").innerHTML
-			);
+			var myResult = num1 + num2;
 
 			if (myResult != 7) {
 				myScore += myResult;
@@ -119,11 +118,9 @@ getUserMedia(
 					document.getElementById("win").style = "display:block";
 				}, 2200);
 			}
-			rndNum1 = parseInt(document.getElementById("rndNum1").value);
-			rndNum2 = parseInt(document.getElementById("rndNum2").value);
 			myObj.value = myScore;
-			myObj.firstNum = rndNum1;
-			myObj.secondNum = rndNum2;
+			myObj.firstNum = num1;
+			myObj.secondNum = num2;
 			m = JSON.stringify(myObj);
 			peer.send(m);
 		});
@@ -194,29 +191,10 @@ getUserMedia(
 
 		peer.on("stream", function (stream2) {
 			var video = document.createElement("video");
+			video.style.width = "100%";
 			document.getElementById("video").appendChild(video);
-			//document.body.appendChild(video);
 			video.srcObject = stream2;
-			//video.src = window.URL.createObjectURL(stream2);
 			video.play();
-			if (navigator.getUserMedia) {
-				navigator.getUserMedia(
-					{
-						video: {
-							width: { ideal: 150 },
-							height: { ideal: 150 },
-						},
-					},
-					handleVideo,
-					videoError
-				);
-			}
-			function handleVideo(stream) {
-				document.getElementById("myCamera").appendChild(myVideo);
-				myVideo.srcObject = stream;
-				myTracks = stream.getTracks();
-			}
-			function videoError(e) {}
 		});
 
 		peer.on("connect", () => {

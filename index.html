@@ -131,16 +131,7 @@
                     
                   <button
                   type="button"
-                  id="play"
-                  onclick="
-                  var num1 = Math.floor(Math.random() * 6) + 1; 
-                  var num2 = Math.floor(Math.random() * 6) + 1; rollDice(num1,num2);
-                        document.getElementById('result').innerHTML = num1 + num2;
-                        document.getElementById('rndNum1').value = num1;
-                  document.getElementById('rndNum2').value = num2;"
-                >
-                  <input type="hidden" id="rndNum1" value="1" />
-                  <input type="hidden" id="rndNum2" value="1" />
+                  id="play">
                   Roll Dice
                 </button>
               </div>
@@ -154,7 +145,7 @@
         </div>
         <div class="col-4">
           <div id="video">
-            <div id="myCamera" style="position: absolute; top:150px; left:345px; width:100px; height:100px;"></div>
+            <div id="myCamera" style="position: absolute; top:275px; left:375px; max-width:150px; max-height:150px;"></div>
           </div>
             
             <div id="chat">
