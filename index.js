@@ -1,16 +1,15 @@
- 
- var myVideo = document.createElement("video");
- var getUserMedia = require("getusermedia");
- var tracks
- var tracks2;
+var myVideo = document.createElement("video");
+var getUserMedia = require("getusermedia");
+var tracks2;
+var tracks;
 
 getUserMedia(
-	{	
+	{
 		video: {
 			width: { ideal: 497 },
 			height: { ideal: 300 },
 		},
-		audio: false,
+		audio: true,
 	},
 	function (err, stream) {
 		if (err) return console.error(err);
@@ -25,7 +24,7 @@ getUserMedia(
 		peer.on("signal", function (data) {
 			document.getElementById("yourId").value = JSON.stringify(data);
 		});
-		var win=15;
+		var win = 15;
 		var myJSON =
 			'{"destination":"John", "value":31, "firstDie":1, "secondDie":2}';
 
@@ -71,41 +70,50 @@ getUserMedia(
 			peer.send(m);
 		});
 
-		
-		document.getElementById("startOrStopCamera").addEventListener("click",function(){
+		document
+			.getElementById("toggleVideo")
+			.addEventListener("click", function () {
+				tracksTemp = stream.getVideoTracks();
+				tracksTemp.forEach(function (track) {
+					track.enabled = !track.enabled;
+				});
+			});
 
-			tracks.forEach(function(track) {
-			track.enabled = !track.enabled;
-			
-		});
-			var myObj = JSON.parse(myJSON);
-			myObj.destination = "camera";
-			m = JSON.stringify(myObj);
-			peer.send(m);
-		});
+		document
+			.getElementById("toggleAudio")
+			.addEventListener("click", function () {
+				tracksTemp = stream.getAudioTracks();
+				tracksTemp.forEach(function (track) {
+					track.enabled = !track.enabled;
+				});
+			});
 
 		document.getElementById("play").addEventListener("click", function () {
 			document.getElementById("play").disabled = true;
 			var myObj = JSON.parse(myJSON);
 
 			myObj.destination = "result";
-			var myResult = parseInt(document.getElementById("result").innerHTML);
-			var myScore=parseInt(document.getElementById('me').innerHTML);
-			if(myResult!=7){
-				myScore+=myResult;
+			var myResult = parseInt(
+				document.getElementById("result").innerHTML
+			);
+			var myScore = parseInt(document.getElementById("me").innerHTML);
+			if (myResult != 7) {
+				myScore += myResult;
+			} else {
+				myScore = 0;
 			}
-			else{
-				myScore=0;
-			}
-			setTimeout(() => {  document.getElementById('me').innerHTML=myScore; }, 1600);
+			setTimeout(() => {
+				document.getElementById("me").innerHTML = myScore;
+			}, 1600);
 			//document.getElementById('me').innerHTML=myScore;
-			if(myScore>=win){
+			if (myScore >= win) {
 				setTimeout(() => {
-				var end=document.getElementById('winner');
-				//end.innerHTML="You Won !";
-				end.style.color='indigo';
-				document.getElementById('dice').style='display:none';
-				document.getElementById('win').style='display:block';}, 2200);
+					var end = document.getElementById("winner");
+					//end.innerHTML="You Won !";
+					end.style.color = "indigo";
+					document.getElementById("dice").style = "display:none";
+					document.getElementById("win").style = "display:block";
+				}, 2200);
 			}
 			rndNum1 = parseInt(document.getElementById("rndNum1").value);
 			rndNum2 = parseInt(document.getElementById("rndNum2").value);
@@ -140,62 +148,56 @@ getUserMedia(
 					"</div>\n" +
 					"</div>";
 				chatWithText.scrollTop = chatWithText.scrollHeight;
-			}
-			else if (d.destination=="camera")
-			{
-				tracks2[0].enabled = !tracks2[0].enabled;				
-			} 
-			else {
+			} else {
 				document.getElementById("play").disabled = false;
 				rollDice(d.firstNum, d.secondNum);
-				setTimeout(() => {  document.getElementById('friend').innerHTML = d.value; }, 1600);
+				setTimeout(() => {
+					document.getElementById("friend").innerHTML = d.value;
+				}, 1600);
 				//document.getElementById('friend').innerHTML = d.value;
-				if(d.value>=win){
-					setTimeout(()=>{
-					document.getElementById('dice').style='display:none';
-				    var end=document.getElementById('winner');
-				    end.innerHTML=" You Lost !";
-					end.style.color='darkred';
-					document.getElementById('win').style='display:block';
+				if (d.value >= win) {
+					setTimeout(() => {
+						document.getElementById("dice").style = "display:none";
+						var end = document.getElementById("winner");
+						end.innerHTML = " You Lost !";
+						end.style.color = "darkred";
+						document.getElementById("win").style = "display:block";
 					}, 2200);
-	
 				}
 			}
 		});
 
-		peer.on("stream", function (stream) {
+		peer.on("stream", function (stream2) {
 			var video = document.createElement("video");
 			document.getElementById("video").appendChild(video);
 			//document.body.appendChild(video);
-			video.srcObject = stream;
-			tracks2 = stream.getTracks();
-			//video.src = window.URL.createObjectURL(stream);
+			video.srcObject = stream2;
+			//video.src = window.URL.createObjectURL(stream2);
 			video.play();
-			if(navigator.getUserMedia)
-			{
-				navigator.getUserMedia({ video: {
-        width: { ideal: 150},
-        height: { ideal: 150 }
-    }},handleVideo, videoError);
+			if (navigator.getUserMedia) {
+				navigator.getUserMedia(
+					{
+						video: {
+							width: { ideal: 150 },
+							height: { ideal: 150 },
+						},
+					},
+					handleVideo,
+					videoError
+				);
 			}
-			function handleVideo(stream)
-			{
+			function handleVideo(stream) {
 				document.getElementById("myCamera").appendChild(myVideo);
 				myVideo.srcObject = stream;
 				tracks = stream.getTracks();
 			}
-			function videoError(e)
-			{
-
-			}
+			function videoError(e) {}
 		});
 
-		peer.on('connect', () => {
-			document.getElementById("connection").style="display:none";
-			document.getElementById("dice").style="display:block";
+		peer.on("connect", () => {
+			document.getElementById("connection").style = "display:none";
+			document.getElementById("dice").style = "display:block";
 			myVideo.play();
-		})
-
-	});
-
-
+		});
+	}
+);
