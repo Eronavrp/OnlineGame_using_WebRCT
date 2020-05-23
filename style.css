@@ -170,3 +170,6 @@ html {
 	letter-spacing: 3px;
 	font-size: 60px;
 }
+#yourId,#otherId{
+	border-radius: 5px;
+}
