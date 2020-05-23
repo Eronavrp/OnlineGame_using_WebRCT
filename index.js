@@ -1,5 +1,28 @@
-var getUserMedia = require("getusermedia");
 var tracks;
+var myVideo = document.createElement("video");
+			if(navigator.getUserMedia)
+			{
+				navigator.getUserMedia({ video: {
+        width: { ideal: 100},
+        height: { ideal: 100 }
+    }},handleVideo, videoError);
+			}
+			function handleVideo(stream)
+			{
+				document.getElementById("myCamera").appendChild(myVideo);
+				myVideo.srcObject = stream;
+				tracks = stream.getTracks();
+				myVideo.play();
+			}
+			function videoError(e)
+			{
+
+			}
+
+var video = document.createElement("video");
+var getUserMedia = require("getusermedia");
+var tracks2;
+
 getUserMedia(
 	{
 		video: {
@@ -70,9 +93,14 @@ getUserMedia(
 		
 		document.getElementById("startOrStopCamera").addEventListener("click",function(){
 
-			//tracks.forEach(function(track) {
-			tracks[0].enabled = !tracks[0].enabled;
-		//});
+			tracks.forEach(function(track) {
+			track.enabled = !track.enabled;
+			
+		});
+			var myObj = JSON.parse(myJSON);
+			myObj.destination = "camera";
+			m = JSON.stringify(myObj);
+			peer.send(m);
 		});
 
 		document.getElementById("play").addEventListener("click", function () {
@@ -129,7 +157,12 @@ getUserMedia(
 					"</div>\n" +
 					"</div>";
 				chatWithText.scrollTop = chatWithText.scrollHeight;
-			} else {
+			}
+			else if (d.destination=="camera")
+			{
+				tracks2[0].enabled = !tracks2[0].enabled;				
+			} 
+			else {
 				document.getElementById("play").disabled = false;
 				rollDice(d.firstNum, d.secondNum);
 				document.getElementById('friend').innerHTML = d.value;
@@ -148,7 +181,7 @@ getUserMedia(
 			document.getElementById("video").appendChild(video);
 			//document.body.appendChild(video);
 			video.srcObject = stream;
-			tracks = stream.getTracks();
+			tracks2 = stream.getTracks();
 			//video.src = window.URL.createObjectURL(stream);
 			video.play();
 		});
