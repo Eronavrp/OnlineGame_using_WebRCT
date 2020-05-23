@@ -135,8 +135,8 @@ html {
 }
 #video {
 	background-color: rgba(0, 0, 0, 0.5) !important;
-	height: 300px;
 	position: relative;
+	height: 300px;
 }
 .col-4 {
 	padding-right: 0;

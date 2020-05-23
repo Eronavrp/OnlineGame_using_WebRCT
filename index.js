@@ -1,30 +1,10 @@
-var tracks;
-var myVideo = document.createElement("video");
-			if(navigator.getUserMedia)
-			{
-				navigator.getUserMedia({ video: {
-        width: { ideal: 150},
-        height: { ideal: 150 }
-    }},handleVideo, videoError);
-			}
-			function handleVideo(stream)
-			{
-				document.getElementById("myCamera").appendChild(myVideo);
-				myVideo.srcObject = stream;
-				tracks = stream.getTracks();
-				myVideo.play();
-			}
-			function videoError(e)
-			{
 
-			}
 
-var video = document.createElement("video");
-var getUserMedia = require("getusermedia");
-var tracks2;
+ var getUserMedia = require("getusermedia");
+ var tracks2;
 
 getUserMedia(
-	{
+	{	
 		video: {
 			width: { ideal: 497 },
 			height: { ideal: 300 },
@@ -93,10 +73,10 @@ getUserMedia(
 		
 		document.getElementById("startOrStopCamera").addEventListener("click",function(){
 
-			tracks.forEach(function(track) {
-			track.enabled = !track.enabled;
+		// 	tracks.forEach(function(track) {
+		// 	track.enabled = !track.enabled;
 			
-		});
+		// });
 			var myObj = JSON.parse(myJSON);
 			myObj.destination = "camera";
 			m = JSON.stringify(myObj);
@@ -184,6 +164,26 @@ getUserMedia(
 			tracks2 = stream.getTracks();
 			//video.src = window.URL.createObjectURL(stream);
 			video.play();
+			var tracks;
+			var myVideo = document.createElement("video");
+			if(navigator.getUserMedia)
+			{
+				navigator.getUserMedia({ video: {
+        width: { ideal: 150},
+        height: { ideal: 150 }
+    }},handleVideo, videoError);
+			}
+			function handleVideo(stream)
+			{
+				document.getElementById("myCamera").appendChild(myVideo);
+				myVideo.srcObject = stream;
+				tracks = stream.getTracks();
+				myVideo.play();
+			}
+			function videoError(e)
+			{
+
+			}
 		});
 
 		peer.on('connect', () => {
@@ -192,3 +192,5 @@ getUserMedia(
 		})
 
 	});
+
+
