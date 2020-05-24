@@ -2,18 +2,9 @@ var myVideo = document.createElement("video");
 var getUserMedia = require("getusermedia");
 
 getUserMedia(
-<<<<<<< HEAD
-	{	
-		video: {
-			width: { ideal: 536 },
-			height: { ideal: 350 },
-		},
-		audio: false,
-=======
 	{
 		video: true,
 		audio: true,
->>>>>>> d9a065f6c4e1c0a932d25b96a1dfd1aa3f482a2d
 	},
 	function (err, stream) {
 		if (err) return console.error(err);
@@ -78,22 +69,6 @@ getUserMedia(
 			peer.send(m);
 		});
 
-<<<<<<< HEAD
-		document.getElementById("playAgain").addEventListener("click", function () {
-		    document.getElementById('dice').style='display:block';	
-			document.getElementById('win').style='display:none';
-			var myObj = JSON.parse(myJSON);
-			myObj.destination = "playAgain";
-			document.getElementById('me').innerHTML=0;
-			document.getElementById('friend').innerHTML=0;
-			myObj.value=0;
-			m = JSON.stringify(myObj);
-			peer.send(m);
-
-		})
-
-		document.getElementById("startOrStopCamera").addEventListener("click",function(){
-=======
 		var input_field = document.getElementById("yourMessage");
 		    
 		input_field.addEventListener("keyup", function(event)
@@ -101,7 +76,6 @@ getUserMedia(
 			if (event.keyCode === 13)
 			{
 				event.preventDefault();
-				var x = document.getElementById("send").click();
 				document.getElementById("send").click();
 			}
 		});
@@ -125,7 +99,6 @@ getUserMedia(
 				this.classList.toggle("red");
 			});
 		
->>>>>>> d9a065f6c4e1c0a932d25b96a1dfd1aa3f482a2d
 
 		var myScore = parseInt(document.getElementById("me").innerHTML);
 
@@ -189,20 +162,6 @@ getUserMedia(
 					"</div>\n" +
 					"</div>";
 				chatWithText.scrollTop = chatWithText.scrollHeight;
-<<<<<<< HEAD
-			}
-			else if (d.destination=="camera")
-			{
-				tracks2[0].enabled = !tracks2[0].enabled;				
-			} 
-			else if (d.destination=="playAgain")
-			{
-				document.getElementById('friend').innerHTML = d.value;
-				document.getElementById('dice').style='display:block';	
-				document.getElementById('win').style='display:none';		
-			}
-			else {
-=======
 			} else if (d.destination == "playAgain") {
 				document.getElementById("friend").innerHTML = 0;
 				document.getElementById("dice").style = "display:block";
@@ -210,22 +169,12 @@ getUserMedia(
 				document.getElementById("me").innerHTML = 0;
 				myScore = d.value;
 			} else {
->>>>>>> d9a065f6c4e1c0a932d25b96a1dfd1aa3f482a2d
 				document.getElementById("play").disabled = false;
 				rollDice(d.firstNum, d.secondNum);
 				setTimeout(() => {
 					document.getElementById("friend").innerHTML = d.value;
 				}, 1600);
 				//document.getElementById('friend').innerHTML = d.value;
-<<<<<<< HEAD
-				if(d.value>=win){
-					setTimeout(()=>{
-					document.getElementById('dice').style='display:none';
-				    var end=document.getElementById('winner');
-				    end.innerHTML="You Lost !";
-					end.style.color='darkred';
-					document.getElementById('win').style='display:block';
-=======
 				if (d.value >= win) {
 					setTimeout(() => {
 						document.getElementById("dice").style = "display:none";
@@ -233,7 +182,6 @@ getUserMedia(
 						end.innerHTML = " You Lost !";
 						end.style.color = "darkred";
 						document.getElementById("win").style = "display:block";
->>>>>>> d9a065f6c4e1c0a932d25b96a1dfd1aa3f482a2d
 					}, 2200);
 				}
 			}

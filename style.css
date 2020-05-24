@@ -138,12 +138,8 @@ body{
 }
 #video {
 	background-color: rgba(0, 0, 0, 0.5) !important;
-<<<<<<< HEAD
-	height: 300px;
-=======
 	position: relative;
 	height: 370px;
->>>>>>> d9a065f6c4e1c0a932d25b96a1dfd1aa3f482a2d
 }
 .col-4 {
 	padding-right: 0;
