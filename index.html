@@ -23,34 +23,28 @@
               <p>Friend</p>
             </div>
           </div>
-          <div class="row">
-            <p style="text-align: center;width:500px;color: #fafafa;margin: 3% 0 0 25%;">How to play: Go ahead and roll the dice to earn points. If you score a 7 than your score is reset to 0, otherwise if you score 15 points first you  will win. </p>
+          <div class="row justify-content-center align-items-center">
+            <p style="text-align: center;width:500px;color: #fafafa;margin: 3% 0;">How to play: Go ahead and roll the dice to earn points. If you score a 7 than your score is reset to 0, otherwise if you score 15 points first you  will win. </p>
           </div>
           <div class="row" >
-            <div class="col-2">
-              <!-- <label>Your ID:</label><br/>
-              <textarea id="yourId"></textarea><br/>
-              <label>Other ID:</label><br/>
-              <textarea id="otherId"></textarea>
-              <button id="connect">connect</button><br/>
-              <label>Rezultati</label>
-              <p id="result"></p>
-              <button id="generate">Click me!!</button> -->
-              <script src="bundle.js" charset="utf-8"></script>
-            </div>
-            
+            <div class="col-2"></div>
             <div class="col-8" style="margin-top: 5%;" id="game">
                   <!-- connection -->
-                  <div id="connection" >
-                    <div class="con" >
-                      <label>Your ID:</label><br/>
-                      <textarea id="yourId"></textarea><br/>
+                  <div id="connection">
+                    <div  class="row">
+                      <div class="col-lg-2 col-sm-4"></div>
+                      <div class="con col-lg-3 col-sm-6" >
+                        <label>Your ID:</label><br/>
+                        <textarea id="yourId"></textarea><br/>
+                      </div>
+                      <div class="col-lg-2 col-sm-4"></div>
+                      <div class=" con col-lg-3 col-sm-6">
+                        <label>Other ID:</label><br/>
+                        <textarea id="otherId"></textarea>
+                      </div>
+                      <div class="col-lg-2 col-sm-2"></div>
                     </div>
-                    <div class="con">
-                      <label>Other ID:</label><br/>
-                      <textarea id="otherId"></textarea>
-                    </div>
-                    <button id="connect">connect</button><br/>
+                    <button id="connect" style="margin-left:40% ;">connect</button><br/>
                   </div> 
                   <!-- end Game -->
                   <div id="win" style="display: none;" >
@@ -134,16 +128,7 @@
                     
                   <button
                   type="button"
-                  id="play"
-                  onclick="
-                  var num1 = Math.floor(Math.random() * 6) + 1; 
-                  var num2 = Math.floor(Math.random() * 6) + 1; rollDice(num1,num2);
-                        document.getElementById('result').innerHTML = num1 + num2;
-                        document.getElementById('rndNum1').value = num1;
-                  document.getElementById('rndNum2').value = num2;"
-                >
-                  <input type="hidden" id="rndNum1" value="1" />
-                  <input type="hidden" id="rndNum2" value="1" />
+                  id="play">
                   Roll Dice
                 </button>
               </div>
@@ -157,7 +142,7 @@
         </div>
         <div class="col-4">
           <div id="video">
-            <div id="myCamera" style="position: absolute; top:150px; left:345px; width:100px; height:100px;"></div>
+            <div id="myCamera" class="small big same"></div>
           </div>
             
             <div id="chat">
@@ -172,10 +157,10 @@
                         <span>Chat with Friend</span>
                       </div>
                       <div class="video_cam">
-                        <span><i class="fas fa-video" id="startOrStopCamera"></i></span>
+                        <span><i class="fas fa-video" id="toggleVideo"></i></span>
                       </div>
                       <div class="video_cam">
-                        <span><i class="fas fa-microphone"></i></span>
+                        <span><i class="fas fa-microphone" id="toggleAudio"></i></span>
                       </div>
                     </div>
                   </div>
@@ -199,5 +184,6 @@
       </div>
     </div>
   </body>
+  <script src="bundle.js" charset="utf-8"></script>
   <script src="game.js"></script>
 </html>

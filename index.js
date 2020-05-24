@@ -1,19 +1,26 @@
- 
- var myVideo = document.createElement("video");
- var getUserMedia = require("getusermedia");
- var tracks
- var tracks2;
+var myVideo = document.createElement("video");
+var getUserMedia = require("getusermedia");
 
 getUserMedia(
+<<<<<<< HEAD
 	{	
 		video: {
 			width: { ideal: 536 },
 			height: { ideal: 350 },
 		},
 		audio: false,
+=======
+	{
+		video: true,
+		audio: true,
+>>>>>>> d9a065f6c4e1c0a932d25b96a1dfd1aa3f482a2d
 	},
 	function (err, stream) {
 		if (err) return console.error(err);
+
+		myVideo.width = 150;
+		document.getElementById("myCamera").appendChild(myVideo);
+		myVideo.srcObject = stream;
 
 		var Peer = require("simple-peer");
 		var peer = new Peer({
@@ -25,7 +32,7 @@ getUserMedia(
 		peer.on("signal", function (data) {
 			document.getElementById("yourId").value = JSON.stringify(data);
 		});
-		var win=15;
+		var win = 6;
 		var myJSON =
 			'{"destination":"John", "value":31, "firstDie":1, "secondDie":2}';
 
@@ -71,6 +78,7 @@ getUserMedia(
 			peer.send(m);
 		});
 
+<<<<<<< HEAD
 		document.getElementById("playAgain").addEventListener("click", function () {
 		    document.getElementById('dice').style='display:block';	
 			document.getElementById('win').style='display:none';
@@ -85,45 +93,74 @@ getUserMedia(
 		})
 
 		document.getElementById("startOrStopCamera").addEventListener("click",function(){
+=======
+		var input_field = document.getElementById("yourMessage");
+		    
+		input_field.addEventListener("keyup", function(event)
+		{
+			if (event.keyCode === 13)
+			{
+				event.preventDefault();
+				var x = document.getElementById("send").click();
+				document.getElementById("send").click();
+			}
+		});
 
-			tracks.forEach(function(track) {
-			track.enabled = !track.enabled;
-			
-		});
-			var myObj = JSON.parse(myJSON);
-			myObj.destination = "camera";
-			m = JSON.stringify(myObj);
-			peer.send(m);
-		});
+		document
+			.getElementById("toggleVideo")
+			.addEventListener("click", function () {
+				tracksTemp = stream.getVideoTracks();
+				tracksTemp.forEach(function (track) {
+					track.enabled = !track.enabled;
+				});
+				this.classList.toggle("red");
+			});
+		document
+			.getElementById("toggleAudio")
+			.addEventListener("click", function () {
+				tracksTemp = stream.getAudioTracks();
+				tracksTemp.forEach(function (track) {
+					track.enabled = !track.enabled;
+				});	
+				this.classList.toggle("red");
+			});
+		
+>>>>>>> d9a065f6c4e1c0a932d25b96a1dfd1aa3f482a2d
+
+		var myScore = parseInt(document.getElementById("me").innerHTML);
 
 		document.getElementById("play").addEventListener("click", function () {
 			document.getElementById("play").disabled = true;
 			var myObj = JSON.parse(myJSON);
 
+			var num1 = Math.floor(Math.random() * 6) + 1;
+			var num2 = Math.floor(Math.random() * 6) + 1;
+			rollDice(num1, num2);
+
 			myObj.destination = "result";
-			var myResult = parseInt(document.getElementById("result").innerHTML);
-			var myScore=parseInt(document.getElementById('me').innerHTML);
-			if(myResult!=7){
-				myScore+=myResult;
+			var myResult = num1 + num2;
+
+			if (myResult != 7) {
+				myScore += myResult;
+			} else {
+				myScore = 0;
 			}
-			else{
-				myScore=0;
-			}
-			setTimeout(() => {  document.getElementById('me').innerHTML=myScore; }, 1600);
-			//document.getElementById('me').innerHTML=myScore;
-			if(myScore>=win){
+			setTimeout(() => {
+				document.getElementById("me").innerHTML = myScore;
+			}, 1600);
+
+			if (myScore >= win) {
 				setTimeout(() => {
-				var end=document.getElementById('winner');
-				//end.innerHTML="You Won !";
-				end.style.color='indigo';
-				document.getElementById('dice').style='display:none';
-				document.getElementById('win').style='display:block';}, 2200);
+					var end = document.getElementById("winner");
+					end.innerHTML = "You Won !";
+					end.style.color = "indigo";
+					document.getElementById("dice").style = "display:none";
+					document.getElementById("win").style = "display:block";
+				}, 2200);
 			}
-			rndNum1 = parseInt(document.getElementById("rndNum1").value);
-			rndNum2 = parseInt(document.getElementById("rndNum2").value);
 			myObj.value = myScore;
-			myObj.firstNum = rndNum1;
-			myObj.secondNum = rndNum2;
+			myObj.firstNum = num1;
+			myObj.secondNum = num2;
 			m = JSON.stringify(myObj);
 			peer.send(m);
 		});
@@ -152,6 +189,7 @@ getUserMedia(
 					"</div>\n" +
 					"</div>";
 				chatWithText.scrollTop = chatWithText.scrollHeight;
+<<<<<<< HEAD
 			}
 			else if (d.destination=="camera")
 			{
@@ -164,10 +202,22 @@ getUserMedia(
 				document.getElementById('win').style='display:none';		
 			}
 			else {
+=======
+			} else if (d.destination == "playAgain") {
+				document.getElementById("friend").innerHTML = 0;
+				document.getElementById("dice").style = "display:block";
+				document.getElementById("win").style = "display:none";
+				document.getElementById("me").innerHTML = 0;
+				myScore = d.value;
+			} else {
+>>>>>>> d9a065f6c4e1c0a932d25b96a1dfd1aa3f482a2d
 				document.getElementById("play").disabled = false;
 				rollDice(d.firstNum, d.secondNum);
-				setTimeout(() => {  document.getElementById('friend').innerHTML = d.value; }, 1600);
+				setTimeout(() => {
+					document.getElementById("friend").innerHTML = d.value;
+				}, 1600);
 				//document.getElementById('friend').innerHTML = d.value;
+<<<<<<< HEAD
 				if(d.value>=win){
 					setTimeout(()=>{
 					document.getElementById('dice').style='display:none';
@@ -175,45 +225,50 @@ getUserMedia(
 				    end.innerHTML="You Lost !";
 					end.style.color='darkred';
 					document.getElementById('win').style='display:block';
+=======
+				if (d.value >= win) {
+					setTimeout(() => {
+						document.getElementById("dice").style = "display:none";
+						var end = document.getElementById("winner");
+						end.innerHTML = " You Lost !";
+						end.style.color = "darkred";
+						document.getElementById("win").style = "display:block";
+>>>>>>> d9a065f6c4e1c0a932d25b96a1dfd1aa3f482a2d
 					}, 2200);
-	
 				}
 			}
 		});
 
-		peer.on("stream", function (stream) {
-			var video = document.createElement("video");
-			document.getElementById("video").appendChild(video);
-			//document.body.appendChild(video);
-			video.srcObject = stream;
-			tracks2 = stream.getTracks();
-			//video.src = window.URL.createObjectURL(stream);
-			video.play();
-			if(navigator.getUserMedia)
-			{
-				navigator.getUserMedia({ video: {
-        width: { ideal: 150},
-        height: { ideal: 150 }
-    }},handleVideo, videoError);
-			}
-			function handleVideo(stream)
-			{
-				document.getElementById("myCamera").appendChild(myVideo);
-				myVideo.srcObject = stream;
-				tracks = stream.getTracks();
-			}
-			function videoError(e)
-			{
+		document
+			.getElementById("playAgain")
+			.addEventListener("click", function () {
+				myScore = 0;
+				document.getElementById("dice").style = "display:block";
+				document.getElementById("win").style = "display:none";
+				var myObj = JSON.parse(myJSON);
+				myObj.destination = "playAgain";
+				document.getElementById("friend").innerHTML = 0;
+				document.getElementById("me").innerHTML = 0;
+				myObj.value = 0;
+				m = JSON.stringify(myObj);
+				peer.send(m);
+			});
 
-			}
+		peer.on("stream", function (stream2) {
+			var video = document.createElement("video");
+			document.getElementById('video').style.height="auto";
+			video.style.width = "100%";
+			console.log(video.style.width )
+			video.style.height = "100%";
+			document.getElementById("video").appendChild(video);
+			video.srcObject = stream2;
+			video.play();
 		});
 
-		peer.on('connect', () => {
-			document.getElementById("connection").style="display:none";
-			document.getElementById("dice").style="display:block";
+		peer.on("connect", () => {
+			document.getElementById("connection").style = "display:none";
+			document.getElementById("dice").style = "display:block";
 			myVideo.play();
-		})
-
-	});
-
-
+		});
+	}
+);
