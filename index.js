@@ -1,33 +1,14 @@
-var tracks;
-var myVideo = document.createElement("video");
-			if(navigator.getUserMedia)
-			{
-				navigator.getUserMedia({ video: {
-        width: { ideal: 100},
-        height: { ideal: 100 }
-    }},handleVideo, videoError);
-			}
-			function handleVideo(stream)
-			{
-				document.getElementById("myCamera").appendChild(myVideo);
-				myVideo.srcObject = stream;
-				tracks = stream.getTracks();
-				myVideo.play();
-			}
-			function videoError(e)
-			{
-
-			}
-
-var video = document.createElement("video");
-var getUserMedia = require("getusermedia");
-var tracks2;
+ 
+ var myVideo = document.createElement("video");
+ var getUserMedia = require("getusermedia");
+ var tracks
+ var tracks2;
 
 getUserMedia(
-	{
+	{	
 		video: {
-			width: { ideal: 436 },
-			height: { ideal: 300 },
+			width: { ideal: 536 },
+			height: { ideal: 350 },
 		},
 		audio: false,
 	},
@@ -90,7 +71,19 @@ getUserMedia(
 			peer.send(m);
 		});
 
-		
+		document.getElementById("playAgain").addEventListener("click", function () {
+		    document.getElementById('dice').style='display:block';	
+			document.getElementById('win').style='display:none';
+			var myObj = JSON.parse(myJSON);
+			myObj.destination = "playAgain";
+			document.getElementById('me').innerHTML=0;
+			document.getElementById('friend').innerHTML=0;
+			myObj.value=0;
+			m = JSON.stringify(myObj);
+			peer.send(m);
+
+		})
+
 		document.getElementById("startOrStopCamera").addEventListener("click",function(){
 
 			tracks.forEach(function(track) {
@@ -116,13 +109,15 @@ getUserMedia(
 			else{
 				myScore=0;
 			}
-			document.getElementById('me').innerHTML=myScore;
+			setTimeout(() => {  document.getElementById('me').innerHTML=myScore; }, 1600);
+			//document.getElementById('me').innerHTML=myScore;
 			if(myScore>=win){
+				setTimeout(() => {
 				var end=document.getElementById('winner');
-				end.innerHTML="Won";
+				//end.innerHTML="You Won !";
 				end.style.color='indigo';
 				document.getElementById('dice').style='display:none';
-				document.getElementById('win').style='display:block';
+				document.getElementById('win').style='display:block';}, 2200);
 			}
 			rndNum1 = parseInt(document.getElementById("rndNum1").value);
 			rndNum2 = parseInt(document.getElementById("rndNum2").value);
@@ -162,16 +157,26 @@ getUserMedia(
 			{
 				tracks2[0].enabled = !tracks2[0].enabled;				
 			} 
+			else if (d.destination=="playAgain")
+			{
+				document.getElementById('friend').innerHTML = d.value;
+				document.getElementById('dice').style='display:block';	
+				document.getElementById('win').style='display:none';		
+			}
 			else {
 				document.getElementById("play").disabled = false;
 				rollDice(d.firstNum, d.secondNum);
-				document.getElementById('friend').innerHTML = d.value;
+				setTimeout(() => {  document.getElementById('friend').innerHTML = d.value; }, 1600);
+				//document.getElementById('friend').innerHTML = d.value;
 				if(d.value>=win){
+					setTimeout(()=>{
 					document.getElementById('dice').style='display:none';
 				    var end=document.getElementById('winner');
-				    end.innerHTML="Lost";
+				    end.innerHTML="You Lost !";
 					end.style.color='darkred';
 					document.getElementById('win').style='display:block';
+					}, 2200);
+	
 				}
 			}
 		});
@@ -184,11 +189,31 @@ getUserMedia(
 			tracks2 = stream.getTracks();
 			//video.src = window.URL.createObjectURL(stream);
 			video.play();
+			if(navigator.getUserMedia)
+			{
+				navigator.getUserMedia({ video: {
+        width: { ideal: 150},
+        height: { ideal: 150 }
+    }},handleVideo, videoError);
+			}
+			function handleVideo(stream)
+			{
+				document.getElementById("myCamera").appendChild(myVideo);
+				myVideo.srcObject = stream;
+				tracks = stream.getTracks();
+			}
+			function videoError(e)
+			{
+
+			}
 		});
 
 		peer.on('connect', () => {
 			document.getElementById("connection").style="display:none";
 			document.getElementById("dice").style="display:block";
+			myVideo.play();
 		})
 
 	});
+
+
