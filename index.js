@@ -1,11 +1,19 @@
+// Video element which will show the camera stream of the user
 var myVideo = document.createElement("video");
+
 var getUserMedia = require("getusermedia");
 
+var win = 15;
+
+var myJSON = '{"destination":"John", "value":31, "firstDie":1, "secondDie":2}';
+
+// Asking for the permission to use camera and microphone of the user
 getUserMedia(
 	{
 		video: true,
 		audio: true,
 	},
+	// Callback function in case that the permission is granted or not
 	function (err, stream) {
 		if (err) return console.error(err);
 
@@ -13,6 +21,7 @@ getUserMedia(
 		document.getElementById("myCamera").appendChild(myVideo);
 		myVideo.srcObject = stream;
 
+		// Import the simple-peer module and create the peer object
 		var Peer = require("simple-peer");
 		var peer = new Peer({
 			initiator: location.hash === "#init",
@@ -20,13 +29,13 @@ getUserMedia(
 			stream: stream,
 		});
 
+		// Generate the peer's ID when signaled
 		peer.on("signal", function (data) {
 			document.getElementById("yourId").value = JSON.stringify(data);
+			console.log(data);
 		});
-		var win = 6;
-		var myJSON =
-			'{"destination":"John", "value":31, "firstDie":1, "secondDie":2}';
 
+		// Send signal to estabilish a connection
 		document
 			.getElementById("connect")
 			.addEventListener("click", function () {
@@ -36,6 +45,7 @@ getUserMedia(
 				peer.signal(otherId);
 			});
 
+		// Send a text message when send button is clicked
 		document.getElementById("send").addEventListener("click", function () {
 			console.log("abcabca");
 			var d = new Date();
@@ -70,15 +80,16 @@ getUserMedia(
 		});
 
 		var input_field = document.getElementById("yourMessage");
-		    
-		input_field.addEventListener("keyup", function(event)
-		{
-			if (event.keyCode === 13)
-			{
+
+		// Send text message when enter button is pressed
+		input_field.addEventListener("keyup", function (event) {
+			if (event.keyCode === 13) {
 				event.preventDefault();
 				document.getElementById("send").click();
 			}
 		});
+
+		// Start/stop video/audio
 
 		document
 			.getElementById("toggleVideo")
@@ -95,13 +106,13 @@ getUserMedia(
 				tracksTemp = stream.getAudioTracks();
 				tracksTemp.forEach(function (track) {
 					track.enabled = !track.enabled;
-				});	
+				});
 				this.classList.toggle("red");
 			});
-		
 
 		var myScore = parseInt(document.getElementById("me").innerHTML);
 
+		// Throw the dice when play button is clicked
 		document.getElementById("play").addEventListener("click", function () {
 			document.getElementById("play").disabled = true;
 			var myObj = JSON.parse(myJSON);
@@ -138,6 +149,7 @@ getUserMedia(
 			peer.send(m);
 		});
 
+		// Receiving data
 		peer.on("data", function (data) {
 			var d = new Date();
 			var hour = d.getHours();
@@ -174,7 +186,7 @@ getUserMedia(
 				setTimeout(() => {
 					document.getElementById("friend").innerHTML = d.value;
 				}, 1600);
-				//document.getElementById('friend').innerHTML = d.value;
+
 				if (d.value >= win) {
 					setTimeout(() => {
 						document.getElementById("dice").style = "display:none";
@@ -187,6 +199,7 @@ getUserMedia(
 			}
 		});
 
+		// Replay after the playagain button is clicked
 		document
 			.getElementById("playAgain")
 			.addEventListener("click", function () {
@@ -202,17 +215,19 @@ getUserMedia(
 				peer.send(m);
 			});
 
+		// Receiving stream from the other peer
 		peer.on("stream", function (stream2) {
 			var video = document.createElement("video");
-			document.getElementById('video').style.height="auto";
+			document.getElementById("video").style.height = "auto";
 			video.style.width = "100%";
-			console.log(video.style.width )
+			console.log(video.style.width);
 			video.style.height = "100%";
 			document.getElementById("video").appendChild(video);
 			video.srcObject = stream2;
 			video.play();
 		});
 
+		// Hide id inputs after the connection is estabilished
 		peer.on("connect", () => {
 			document.getElementById("connection").style = "display:none";
 			document.getElementById("dice").style = "display:block";
